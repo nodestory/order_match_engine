@@ -35,10 +35,10 @@ func (lm *LimitOrder) TradeWith(counterOrder Order, counterBook OrderBook) *Trad
 
 func (lm *LimitOrder) crossed(price int64) bool {
 	switch lm.Type {
-	case "ask": // buy
-		return price <= lm.Price // if people offer price higher or equal than ask limit
-	case "bid": // sell
-		return price >= lm.Price // if people offer price lower or equal than bid limit
+	case "ask": // sell
+		return price >= lm.Price
+	case "bid": // buy
+		return price <= lm.Price
 	default:
 		return false
 	}

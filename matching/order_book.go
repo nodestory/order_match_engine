@@ -54,7 +54,7 @@ func NewAskOrderBook(market string) *AskOrderBook {
 }
 
 func (aob *AskOrderBook) Top() Order {
-	pl := aob.LimitOrders.Max()
+	pl := aob.LimitOrders.Min()
 	if pl == nil {
 		return nil
 	}
@@ -62,7 +62,7 @@ func (aob *AskOrderBook) Top() Order {
 }
 
 func (aob *AskOrderBook) FillTop(trade *Trade) {
-	pl := aob.LimitOrders.Max()
+	pl := aob.LimitOrders.Min()
 	order := pl.(*PriceLevel).Top()
 
 	lm := order.(*LimitOrder)
@@ -88,7 +88,7 @@ func NewBidOrderBook(market string) *BidOrderBook {
 }
 
 func (bob *BidOrderBook) Top() Order {
-	pl := bob.LimitOrders.Min()
+	pl := bob.LimitOrders.Max()
 	if pl == nil {
 		return nil
 	}
@@ -96,7 +96,7 @@ func (bob *BidOrderBook) Top() Order {
 }
 
 func (bob *BidOrderBook) FillTop(trade *Trade) {
-	pl := bob.LimitOrders.Min()
+	pl := bob.LimitOrders.Max()
 	order := pl.(*PriceLevel).Top()
 
 	lm := order.(*LimitOrder)
